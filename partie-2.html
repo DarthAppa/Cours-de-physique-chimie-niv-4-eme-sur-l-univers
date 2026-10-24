@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Le système solaire</title>
+  <meta name="description" content="Partie 2 : le Soleil, les huit planètes, leurs distances et leurs révolutions, et une maquette à l'échelle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230F1433%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%276%27 fill=%27none%27 stroke=%27%23FF5D72%27 stroke-width=%273%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%271.8%27 fill=%27%23FF5D72%27/%3E%3C/svg%3E">
+  <meta property="og:title" content="Le système solaire">
+  <meta property="og:description" content="Partie 2 : le Soleil, les huit planètes, leurs distances et leurs révolutions, et une maquette à l'échelle.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/systeme.js" defer></script>
+</head>
+<body data-partie="2">
+  <header id="barre" class="barre enveloppe"></header>
+
+  <main>
+    <section class="partie-tete enveloppe">
+      <div class="large">
+        <p class="surtitre">Partie 2 sur 9</p>
+        <h1>Le système solaire</h1>
+        <p class="chapeau colonne" style="margin-inline:0">Une étoile, le Soleil, et huit planètes qui tournent autour d'elle. Qui est le plus proche, qui va le plus vite, et à quel point tout cela est vide ?</p>
+      </div>
+    </section>
+
+    <section class="enveloppe" aria-labelledby="titre-prediction">
+      <div class="large">
+        <div class="prediction colonne" style="margin-inline:0">
+          <p class="etiquette" id="titre-prediction">Avant de commencer, fais une prédiction</p>
+          <p>Imagine que le Soleil soit un ballon de foot de 22 cm, posé au milieu de la cour. À combien de mètres du ballon faudrait-il placer la Terre ?</p>
+          <div class="prediction-saisie">
+            <input id="prediction-champ" type="text" inputmode="decimal" placeholder="en mètres" aria-label="Ta prédiction en mètres">
+            <button type="button" class="bouton discret" id="prediction-valider" data-cible="24">Voir la réponse</button>
+          </div>
+          <div class="prediction-reponse" id="prediction-reponse" hidden aria-live="polite">
+            <p><strong class="debut"></strong> Il faudrait la placer à environ <strong>24 m</strong>, et la Terre ne serait qu'une tête d'épingle de 2 mm. Le système solaire est surtout fait de vide. Vérifie-le avec la maquette plus bas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-planetaire">
+      <div class="large">
+        <h2 id="titre-planetaire" style="margin-block:1.6rem 1rem">Le planétaire</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Les planètes tournent autour du Soleil à leur vraie vitesse relative. Clique sur une planète pour afficher sa fiche, et passe aux distances à l'échelle pour voir à quel point les planètes extérieures sont loin.</p>
+        <div class="observatoire">
+          <div class="ecran">
+            <canvas id="planetaire" role="img" aria-label="Le Soleil au centre et les huit planètes sur leurs orbites circulaires."></canvas>
+            <div class="echelle" aria-live="off"><span>Temps écoulé : <strong id="pl-temps">0 jours</strong></span></div>
+          </div>
+          <div class="panneau" aria-live="polite">
+            <p class="panneau-niveau" id="pl-type">Planète tellurique</p>
+            <h3 id="pl-nom">Terre</h3>
+            <p id="pl-texte"></p>
+            <dl class="mesures">
+              <div><dt>Nature</dt><dd id="pl-nature"></dd></div>
+              <div><dt id="pl-temp-titre">Température moyenne de surface</dt><dd id="pl-temperature"></dd></div>
+              <div><dt>Distance au Soleil</dt><dd id="pl-distance"></dd></div>
+              <div><dt>Diamètre</dt><dd id="pl-diametre"></dd></div>
+              <div><dt>Durée d'une révolution</dt><dd id="pl-revolution"></dd></div>
+              <div><dt>La lumière du Soleil met</dt><dd id="pl-lumiere"></dd></div>
+              <div><dt>Satellites naturels connus</dt><dd id="pl-lunes"></dd></div>
+            </dl>
+          </div>
+          <div class="commandes">
+            <div class="etapes" id="pl-choix" aria-label="Choisir une planète"></div>
+            <div class="reglages">
+              <label class="reglage">Vitesse
+                <select id="pl-vitesse">
+                  <option value="1">1 jour par seconde</option>
+                  <option value="30" selected>1 mois par seconde</option>
+                  <option value="365.25">1 an par seconde</option>
+                  <option value="3652.5">10 ans par seconde</option>
+                </select>
+              </label>
+              <fieldset class="reglage-groupe">
+                <legend>Distances</legend>
+                <label><input type="radio" name="pl-echelle" value="resserree" checked> resserrées</label>
+                <label><input type="radio" name="pl-echelle" value="reelle"> à l'échelle</label>
+              </fieldset>
+              <button type="button" class="pause" id="pl-pause" aria-pressed="false">Pause</button>
+            </div>
+          </div>
+        </div>
+        <p class="texte-doux colonne" style="margin:1rem 0 0;font-size:0.9rem">Les planètes sont dessinées beaucoup plus grosses qu'en réalité, sinon elles seraient invisibles. Les orbites sont représentées par des cercles parcourus à vitesse constante : c'est une très bonne approximation.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-maquette">
+      <div class="colonne">
+        <h2 id="titre-maquette">Le système solaire dans la cour</h2>
+        <p>Choisis un objet pour représenter le Soleil. Tout le reste est réduit dans la même proportion.</p>
+        <label class="reglage" style="margin-top:1rem">Le Soleil est
+          <select id="maq-objet">
+            <option value="0.01">une bille (1 cm)</option>
+            <option value="0.067">une balle de tennis (6,7 cm)</option>
+            <option value="0.22" selected>un ballon de foot (22 cm)</option>
+            <option value="0.65">un ballon de gym (65 cm)</option>
+          </select>
+        </label>
+        <div class="tableau-conteneur" style="margin-top:1.2rem">
+          <table>
+            <thead><tr><th scope="col">Planète</th><th scope="col">Taille dans la maquette</th><th scope="col">Distance au ballon</th></tr></thead>
+            <tbody id="maq-corps"></tbody>
+          </table>
+        </div>
+        <p id="maq-bilan" style="margin-top:1.2rem" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-retenir">
+      <div class="colonne">
+        <h2 id="titre-retenir">Ce qu'il faut retenir</h2>
+        <p>Le <strong>Soleil</strong> est une étoile. Il contient à lui seul 99,8 % de la masse du système solaire, et c'est sa <strong>gravitation</strong> qui retient tout le reste en orbite autour de lui.</p>
+        <p>Huit planètes tournent autour du Soleil, presque dans le même plan et toutes dans le même sens. Leurs orbites sont presque des cercles. <strong>Plus une planète est loin du Soleil, plus sa révolution dure longtemps</strong> : 88 jours pour Mercure, 165 ans pour Neptune.</p>
+        <div class="familles" style="margin-top:1.4rem">
+          <div class="famille">
+            <h3>Les planètes telluriques</h3>
+            <p class="famille-noms">Mercure, Vénus, Terre, Mars</p>
+            <ul>
+              <li>proches du Soleil</li>
+              <li>petites et rocheuses, avec une surface solide</li>
+              <li>températures très variées : de -65 °C sur Mars à 464 °C sur Vénus</li>
+              <li>peu ou pas de satellites</li>
+            </ul>
+          </div>
+          <div class="famille">
+            <h3>Les planètes géantes</h3>
+            <p class="famille-noms">Jupiter, Saturne, Uranus, Neptune</p>
+            <ul>
+              <li>loin du Soleil</li>
+              <li>énormes, gazeuses (Jupiter, Saturne) ou faites de gaz et de glaces (Uranus, Neptune), sans surface solide</li>
+              <li>très froides : de -110 °C à -200 °C au sommet des nuages</li>
+              <li>des anneaux et de nombreux satellites</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:1.4rem">Entre Mars et Jupiter tourne la <strong>ceinture d'astéroïdes</strong>. Au-delà de Neptune, la <strong>ceinture de Kuiper</strong> abrite des planètes naines comme Pluton, et des comètes.</p>
+        <p class="astuce">Pour retenir l'ordre des planètes : « <strong>M</strong>e <strong>V</strong>oici <strong>T</strong>out <strong>M</strong>ouillé, <strong>J</strong>'ai <strong>S</strong>uivi <strong>U</strong>n <strong>N</strong>uage » : Mercure, Vénus, Terre, Mars, Jupiter, Saturne, Uranus, Neptune.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-vocabulaire">
+      <div class="colonne">
+        <h2 id="titre-vocabulaire">Le vocabulaire</h2>
+        <dl class="vocabulaire">
+          <div><dt>Orbite</dt><dd>Trajectoire d'un astre autour d'un autre. La Terre décrit une orbite autour du Soleil.</dd></div>
+          <div><dt>Période de révolution</dt><dd>Durée d'un tour complet autour du Soleil. Pour la Terre : 1 an, soit environ 365,25 jours.</dd></div>
+          <div><dt>Planète tellurique</dt><dd>Planète rocheuse, avec une surface solide, comme la Terre.</dd></div>
+          <div><dt>Planète géante</dt><dd>Très grande planète faite surtout de gaz et de glaces, sans surface solide.</dd></div>
+          <div><dt>Planète naine</dt><dd>Astre rond qui tourne autour du Soleil mais n'a pas « fait le ménage » sur son orbite. Pluton l'est depuis 2006.</dd></div>
+          <div><dt>Astéroïde</dt><dd>Petit corps rocheux ou métallique qui tourne autour du Soleil.</dd></div>
+          <div><dt>Comète</dt><dd>Bloc de glace et de poussière. Près du Soleil, la glace se vaporise et forme une longue queue.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-donnees">
+      <div class="colonne">
+        <h2 id="titre-donnees">Les données</h2>
+        <div class="tableau-conteneur">
+          <table>
+            <thead><tr><th scope="col">Planète</th><th scope="col">Nature</th><th scope="col">Température</th><th scope="col">Distance au Soleil</th><th scope="col">Diamètre</th><th scope="col">Révolution</th><th scope="col">Satellites</th></tr></thead>
+            <tbody>
+              <tr><td>Mercure</td><td>Rocheuse</td><td class="nombre">167 °C</td><td class="nombre">0,39 ua · 58 M km</td><td class="nombre">4 879 km</td><td class="nombre">88 jours</td><td class="nombre">0</td></tr>
+              <tr><td>Vénus</td><td>Rocheuse</td><td class="nombre">464 °C</td><td class="nombre">0,72 ua · 108 M km</td><td class="nombre">12 104 km</td><td class="nombre">225 jours</td><td class="nombre">0</td></tr>
+              <tr><td>Terre</td><td>Rocheuse</td><td class="nombre">15 °C</td><td class="nombre">1 ua · 150 M km</td><td class="nombre">12 742 km</td><td class="nombre">365,25 jours</td><td class="nombre">1</td></tr>
+              <tr><td>Mars</td><td>Rocheuse</td><td class="nombre">-65 °C</td><td class="nombre">1,52 ua · 228 M km</td><td class="nombre">6 779 km</td><td class="nombre">687 jours</td><td class="nombre">2</td></tr>
+              <tr><td>Jupiter</td><td>Gazeuse</td><td class="nombre">-110 °C*</td><td class="nombre">5,20 ua · 778 M km</td><td class="nombre">139 820 km</td><td class="nombre">11,9 ans</td><td class="nombre">115</td></tr>
+              <tr><td>Saturne</td><td>Gazeuse</td><td class="nombre">-140 °C*</td><td class="nombre">9,54 ua · 1 432 M km</td><td class="nombre">116 460 km</td><td class="nombre">29,5 ans</td><td class="nombre">293</td></tr>
+              <tr><td>Uranus</td><td>Gaz et glaces</td><td class="nombre">-195 °C*</td><td class="nombre">19,2 ua · 2 867 M km</td><td class="nombre">50 724 km</td><td class="nombre">84 ans</td><td class="nombre">29</td></tr>
+              <tr><td>Neptune</td><td>Gaz et glaces</td><td class="nombre">-200 °C*</td><td class="nombre">30,1 ua · 4 515 M km</td><td class="nombre">49 244 km</td><td class="nombre">165 ans</td><td class="nombre">16</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="texte-doux" style="margin-top:0.8rem;font-size:0.88rem">M km = millions de kilomètres. Températures moyennes ; * au sommet des nuages, car les géantes n'ont pas de surface solide. Satellites connus en juillet 2026 : leur nombre augmente régulièrement avec les nouvelles découvertes.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-quiz">
+      <div class="colonne">
+        <h2 id="titre-quiz">Mini-quiz</h2>
+        <p class="texte-doux" style="margin-bottom:1.4rem">Cinq questions pour vérifier que tu as bien compris.</p>
+        <div id="quiz"></div>
+      </div>
+    </section>
+
+    <nav class="suite enveloppe" aria-label="Navigation entre les parties">
+      <div class="large" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;width:100%">
+        <a class="bouton discret" href="partie-1.html">Partie 1 : Notre adresse cosmique</a>
+        <span class="bientot">Partie 3 : La lumière, messagère du ciel, en préparation</span>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="pied enveloppe">
+    <div class="large">Physique-chimie, cycle 4, niveau 4e. Données : NASA (fiches des planètes ; nombre de satellites mis à jour en juillet 2026). Distances moyennes arrondies.</div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.Univers.quiz("quiz", [
+        {
+          q: "Quelle est la planète la plus proche du Soleil ?",
+          choix: ["Vénus", "La Terre", "Mercure", "Mars"],
+          bonne: 2,
+          explication: "Mercure est à 0,39 ua du Soleil, soit environ 58 millions de km. Vient ensuite Vénus, puis la Terre."
+        },
+        {
+          q: "Quelles sont les quatre planètes telluriques ?",
+          choix: ["Mercure, Vénus, Terre, Mars", "Jupiter, Saturne, Uranus, Neptune", "Terre, Mars, Jupiter, Saturne", "Vénus, Terre, Saturne, Neptune"],
+          bonne: 0,
+          explication: "Les planètes telluriques sont les quatre plus proches du Soleil : petites, rocheuses, avec une surface solide."
+        },
+        {
+          q: "Combien de temps met la Terre pour faire un tour complet autour du Soleil ?",
+          choix: ["1 jour", "1 mois", "1 an", "1 siècle"],
+          bonne: 2,
+          explication: "Une révolution de la Terre dure 1 an, environ 365,25 jours. Un jour, c'est la durée d'un tour de la Terre sur elle-même."
+        },
+        {
+          q: "Plus une planète est éloignée du Soleil…",
+          choix: ["plus sa révolution est courte", "plus sa révolution est longue", "plus elle est petite", "plus elle tourne en sens inverse"],
+          bonne: 1,
+          explication: "Elle a un plus long chemin à parcourir et elle avance moins vite : 88 jours pour Mercure, 165 ans pour Neptune."
+        },
+        {
+          q: "Jupiter est à 5,2 ua du Soleil, et 1 ua vaut environ 150 millions de km. Cela fait environ…",
+          choix: ["5,2 millions de km", "78 millions de km", "780 millions de km", "7,8 milliards de km"],
+          bonne: 2,
+          explication: "5,2 × 150 millions = 780 millions de km. C'est une simple proportionnalité."
+        }
+      ]);
+    });
+  </script>
+</body>
+</html>

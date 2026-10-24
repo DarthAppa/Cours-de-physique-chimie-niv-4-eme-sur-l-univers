@@ -403,6 +403,41 @@ a.partie .partie-num { color: var(--halpha); }
 }
 .note-voyager strong { color: var(--texte); }
 
+/* Planétaire : réglages */
+.reglages { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem 1.4rem; }
+.reglage { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; }
+.commandes .reglage { color: #C9C6E4; }
+.reglage select {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.6rem;
+  min-height: 40px;
+  border-radius: var(--rayon);
+  border: 1px solid var(--ligne);
+  background: var(--nuit-2);
+  color: var(--texte);
+}
+.commandes .reglage select { background: #111743; color: #ECE9F7; border-color: #323C78; }
+.reglage-groupe { border: 0; margin: 0; padding: 0; display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: #C9C6E4; }
+.reglage-groupe legend { float: left; padding: 0; margin-right: 0.2rem; }
+.reglage-groupe label { display: inline-flex; align-items: center; gap: 0.3rem; cursor: pointer; }
+.reglage-groupe input { accent-color: #FF5D72; }
+.commandes .pause {
+  font: inherit; font-size: 0.85rem; font-weight: 700;
+  color: #45D3C6; background: transparent; border: 1px solid #45D3C6;
+  border-radius: 99px; padding: 0.4rem 1.1rem; min-height: 40px; cursor: pointer;
+}
+#pl-choix button[aria-pressed="true"] { background: #D9304D; border-color: #D9304D; color: #fff; }
+
+/* Familles de planètes */
+.familles { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+.famille { border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 1rem 1.1rem; background: var(--nuit-2); }
+.famille h3 { font-size: 1.3rem; }
+.famille-noms { color: var(--halpha); font-weight: 700; margin-top: 0.3rem !important; }
+.famille ul { margin: 0.6rem 0 0; padding-left: 1.1rem; }
+.famille li + li { margin-top: 0.2rem; }
+.astuce { margin-top: 1.2rem !important; padding: 0.9rem 1rem; border-radius: var(--rayon); background: var(--nuit-3); }
+
 /* Emboîtement */
 .emboitement { display: grid; gap: 0; }
 .boite {
