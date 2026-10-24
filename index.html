@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Notre place dans l'Univers</title>
+  <meta name="description" content="Cours interactif de physique-chimie, niveau 4e : l'organisation de la matière dans l'Univers.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230F1433%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%276%27 fill=%27none%27 stroke=%27%23FF5D72%27 stroke-width=%273%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%271.8%27 fill=%27%23FF5D72%27/%3E%3C/svg%3E">
+  <meta property="og:title" content="Notre place dans l'Univers">
+  <meta property="og:description" content="Cours interactif de physique-chimie, niveau 4e : l'organisation de la matière dans l'Univers.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+  <header id="barre" class="barre enveloppe"></header>
+
+  <main>
+    <section class="accueil-tete enveloppe">
+      <div class="large accueil-grille">
+        <div class="accueil-texte">
+          <h1>Notre place dans <span>l'Univers</span></h1>
+          <p class="chapeau">Un cours de physique-chimie de 4e en neuf étapes, de la Terre jusqu'aux confins de l'Univers observable. Chaque partie se termine par un quiz.</p>
+          <p><a class="bouton" href="partie-1.html">Commencer le voyage</a></p>
+        </div>
+
+        <figure class="lettre" style="margin:0">
+          <div class="timbre" aria-hidden="true"><span>Univers<strong>13,8</strong>milliards d'années</span></div>
+          <p class="lettre-a">Ton adresse complète, de la plus petite à la plus grande :</p>
+          <ol class="adresse">
+            <li><span>Toi, élève de 4e</span></li>
+            <li><input id="ville" type="text" autocomplete="address-level2" placeholder="Écris ta ville ici" aria-label="Ta ville"></li>
+            <li><span>France</span><small>pays</small></li>
+            <li><span>La Terre</span><small>3e planète</small></li>
+            <li><span>Le système solaire</span><small>8 planètes</small></li>
+            <li><span>La Voie lactée</span><small>100 000 al</small></li>
+            <li><span>L'amas de galaxies</span><small>une soixantaine de galaxies</small></li>
+            <li><span>Laniakea</span><small>100 000 galaxies</small></li>
+            <li class="cosmique"><span>L'Univers observable</span><small>93 milliards d'al</small></li>
+          </ol>
+          <figcaption class="lettre-pied">Ta ville reste enregistrée sur cet appareil uniquement.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sommaire enveloppe" id="sommaire" aria-labelledby="titre-sommaire">
+      <div class="large">
+        <div class="sommaire-tete">
+          <h2 id="titre-sommaire">Les neuf étapes du voyage</h2>
+          <p>Ta progression et tes scores sont gardés sur cet appareil. La bande de couleur en haut de la page s'allume à chaque partie terminée.</p>
+        </div>
+        <ol class="parties" id="liste-parties"></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pied enveloppe">
+    <div class="large">Physique-chimie, cycle 4, niveau 4e. Programme de 2020, thème « Organisation et transformations de la matière ».</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Notre adresse cosmique</title>
+  <meta name="description" content="Partie 1 : de la Terre jusqu'à l'Univers observable, à l'échelle réelle.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230F1433%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%276%27 fill=%27none%27 stroke=%27%23FF5D72%27 stroke-width=%273%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%271.8%27 fill=%27%23FF5D72%27/%3E%3C/svg%3E">
+  <meta property="og:title" content="Notre adresse cosmique">
+  <meta property="og:description" content="Partie 1 : de la Terre jusqu'à l'Univers observable, à l'échelle réelle.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/zoom.js" defer></script>
+</head>
+<body data-partie="1">
+  <header id="barre" class="barre enveloppe"></header>
+
+  <main>
+    <section class="partie-tete enveloppe">
+      <div class="large">
+        <p class="surtitre">Partie 1 sur 9</p>
+        <h1>Notre adresse cosmique</h1>
+        <p class="chapeau colonne" style="margin-inline:0">Où sommes-nous exactement ? Pour le savoir, on part de la Terre et on recule, encore et encore, jusqu'à voir tout l'Univers observable. Tout est dessiné à la vraie échelle.</p>
+      </div>
+    </section>
+
+    <section class="enveloppe" aria-labelledby="titre-prediction">
+      <div class="large">
+        <div class="prediction colonne" style="margin-inline:0">
+          <p class="etiquette" id="titre-prediction">Avant de commencer, fais une prédiction</p>
+          <p>À ton avis, combien de planètes Terre faudrait-il aligner, côte à côte, pour aller de la Terre jusqu'à la Lune ?</p>
+          <div class="prediction-saisie">
+            <input id="prediction-champ" type="text" inputmode="decimal" placeholder="ex. 100" aria-label="Ta prédiction : nombre de Terres">
+            <button type="button" class="bouton discret" id="prediction-valider" data-cible="30">Voir la réponse</button>
+          </div>
+          <div class="prediction-reponse" id="prediction-reponse" hidden aria-live="polite">
+            <p><strong class="debut"></strong> Il en faut environ <strong>30</strong>. La Lune est à 384 400 km et la Terre mesure 12 742 km de diamètre : 384 400 ÷ 12 742 ≈ 30. Vérifie-le à l'étape 2 du zoom.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-zoom">
+      <div class="large">
+        <h2 id="titre-zoom" style="margin-block:1.6rem 1rem">Le zoom cosmique</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Fais glisser le curseur ou choisis une étape. Le bouton « Voyage automatique » recule tout seul jusqu'aux confins de l'Univers en 45 secondes. Le son est coupé au départ : active-le si tu le souhaites.</p>
+        <div class="observatoire">
+          <div class="ecran">
+            <canvas id="zoom" role="img" aria-label="Vue à l'échelle : la Terre."></canvas>
+            <div class="echelle" aria-hidden="true">
+              <div class="echelle-barre" id="echelle-barre"></div>
+              <span id="echelle-texte"></span>
+            </div>
+          </div>
+          <div class="panneau" aria-live="polite">
+            <p class="panneau-niveau" id="niveau-num">Étape 1 sur 8</p>
+            <h3 id="niveau-nom">La Terre</h3>
+            <p id="niveau-texte"></p>
+            <dl class="mesures">
+              <div><dt>Taille</dt><dd id="mes-taille"></dd></div>
+              <div><dt>Temps de trajet de la lumière</dt><dd id="mes-lumiere"></dd></div>
+            </dl>
+          </div>
+          <div class="commandes">
+            <div class="curseur-ligne">
+              <label for="zoom-curseur">Plus près</label>
+              <input type="range" id="zoom-curseur" min="0" max="1000" step="1" value="10">
+              <label for="zoom-curseur">Plus loin</label>
+            </div>
+            <div class="etapes" id="etapes"></div>
+            <div class="musique" id="musique" hidden>
+              <div id="musique-lecteur"></div>
+              <p id="musique-etat">Musique : Hans Zimmer, <em>Interstellar</em>, thème principal, version piano de Patrik Pietschmann.</p>
+            </div>
+          </div>
+        </div>
+        <p class="note-voyager colonne">
+          <strong>En orange : la sonde Voyager 1.</strong> Lancée en 1977, elle a survolé Jupiter (1979) et Saturne (1980) : les points orange montrent où étaient ces planètes à ce moment-là, elles ont continué de tourner depuis. Elle est sortie de la bulle du Soleil, l'héliosphère, en 2012. C'est l'objet fabriqué par l'humanité le plus lointain. Le 18 novembre 2026, elle sera à <strong>un jour-lumière</strong> de la Terre : ses signaux radio, qui voyagent à la vitesse de la lumière, mettront 24 heures à nous parvenir.
+        </p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-retenir">
+      <div class="colonne">
+        <h2 id="titre-retenir">Ce qu'il faut retenir</h2>
+        <p>L'Univers est organisé en <strong>structures emboîtées</strong>, comme des poupées russes. Chacune est contenue dans une plus grande, et c'est la <strong>gravitation</strong> qui les tient ensemble.</p>
+        <div class="emboitement" style="margin-top:1.3rem">
+          <div class="boite"><span class="boite-titre">L'Univers observable <small>93 milliards d'al</small></span>
+            <div class="boite"><span class="boite-titre">Laniakea, superamas <small>520 millions d'al</small></span>
+              <div class="boite"><span class="boite-titre">L'amas de galaxies <small>10 millions d'al</small></span>
+                <div class="boite"><span class="boite-titre">La Voie lactée, notre galaxie <small>100 000 al</small></span>
+                  <div class="boite"><span class="boite-titre">Le système solaire <small>9 milliards de km</small></span>
+                    <div class="boite ici"><span class="boite-titre">La Terre <small>12 742 km</small></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-vocabulaire">
+      <div class="colonne">
+        <h2 id="titre-vocabulaire">Le vocabulaire</h2>
+        <dl class="vocabulaire">
+          <div><dt>Étoile</dt><dd>Astre qui produit sa propre lumière. Le Soleil est une étoile.</dd></div>
+          <div><dt>Planète</dt><dd>Astre qui tourne autour d'une étoile et qui ne produit pas de lumière : il renvoie celle de son étoile.</dd></div>
+          <div><dt>Satellite</dt><dd>Astre qui tourne autour d'une planète. La Lune est le satellite naturel de la Terre.</dd></div>
+          <div><dt>Galaxie</dt><dd>Immense ensemble d'étoiles, de gaz et de poussières, lié par la gravitation. La nôtre s'appelle la Voie lactée.</dd></div>
+          <div><dt>Unité astronomique (ua)</dt><dd>Distance moyenne entre la Terre et le Soleil : environ 150 millions de km. Pratique dans le système solaire.</dd></div>
+          <div><dt>Année-lumière (al)</dt><dd>Distance parcourue par la lumière en un an dans le vide : environ 9 460 milliards de km. Pratique au-delà du système solaire. On l'étudiera en détail dans la partie 4.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-ordres">
+      <div class="colonne">
+        <h2 id="titre-ordres">Les ordres de grandeur</h2>
+        <p>Plus on s'éloigne, plus les nombres en kilomètres deviennent énormes. C'est pour ça qu'on change d'unité.</p>
+        <div class="tableau-conteneur" style="margin-top:1.2rem">
+          <table>
+            <thead><tr><th scope="col">Structure ou distance</th><th scope="col">Valeur</th><th scope="col">En kilomètres</th></tr></thead>
+            <tbody>
+              <tr><td>Diamètre de la Terre</td><td class="nombre">12 742 km</td><td class="nombre">12 742 km</td></tr>
+              <tr><td>Terre – Lune</td><td class="nombre">384 400 km</td><td class="nombre">384 400 km</td></tr>
+              <tr><td>Terre – Soleil</td><td class="nombre">1 ua</td><td class="nombre">150 millions de km</td></tr>
+              <tr><td>Soleil – Neptune</td><td class="nombre">30 ua</td><td class="nombre">4,5 milliards de km</td></tr>
+              <tr><td>Soleil – sonde Voyager 1 (octobre 2026)</td><td class="nombre">≈ 172 ua</td><td class="nombre">près de 26 milliards de km</td></tr>
+              <tr><td>Soleil – Proxima du Centaure</td><td class="nombre">4,24 al</td><td class="nombre">40 000 milliards de km</td></tr>
+              <tr><td>Diamètre de la Voie lactée</td><td class="nombre">100 000 al</td><td class="nombre">946 millions de milliards de km</td></tr>
+              <tr><td>Voie lactée – Andromède</td><td class="nombre">2,5 millions d'al</td><td class="nombre">trop grand pour être pratique</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-quiz">
+      <div class="colonne">
+        <h2 id="titre-quiz">Mini-quiz</h2>
+        <p class="texte-doux" style="margin-bottom:1.4rem">Cinq questions pour vérifier que tu as bien compris.</p>
+        <div id="quiz"></div>
+      </div>
+    </section>
+
+    <nav class="suite enveloppe" aria-label="Navigation entre les parties">
+      <div class="large" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;width:100%">
+        <a class="bouton discret" href="index.html#sommaire">Retour au sommaire</a>
+        <span class="bientot">Partie 2 : Le système solaire, en préparation</span>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="pied enveloppe">
+    <div class="large">Physique-chimie, cycle 4, niveau 4e. Distances arrondies, positions des astres simplifiées pour la lisibilité ; tailles et distances à l'échelle.</div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.Univers.quiz("quiz", [
+        {
+          q: "Laquelle de ces structures est la plus grande ?",
+          choix: ["Le système solaire", "La Voie lactée", "L'amas de galaxies", "La Terre"],
+          bonne: 2,
+          explication: "L'amas de galaxies contient la Voie lactée, qui contient le système solaire, qui contient la Terre."
+        },
+        {
+          q: "Le Soleil est…",
+          choix: ["une planète", "une étoile", "une galaxie", "un satellite"],
+          bonne: 1,
+          explication: "Le Soleil produit sa propre lumière : c'est une étoile, une parmi les centaines de milliards de la Voie lactée."
+        },
+        {
+          q: "Quel classement va bien du plus petit au plus grand ?",
+          choix: [
+            "Terre, Voie lactée, système solaire, Laniakea",
+            "Terre, système solaire, Voie lactée, Laniakea",
+            "Système solaire, Terre, Laniakea, Voie lactée",
+            "Terre, système solaire, Laniakea, Voie lactée"
+          ],
+          bonne: 1,
+          explication: "Chaque structure est emboîtée dans la suivante : la Terre dans le système solaire, le système solaire dans la Voie lactée, la Voie lactée dans Laniakea."
+        },
+        {
+          q: "Quelle est la taille de la Voie lactée ?",
+          choix: ["environ 100 000 km", "environ 100 000 années-lumière", "environ 100 unités astronomiques", "environ 4,24 années-lumière"],
+          bonne: 1,
+          explication: "La Voie lactée mesure environ 100 000 al. 4,24 al, c'est la distance de Proxima du Centaure, l'étoile la plus proche du Soleil."
+        },
+        {
+          q: "Quelle est l'étoile la plus proche du Soleil ?",
+          choix: ["Sirius", "Proxima du Centaure", "Andromède", "La Lune"],
+          bonne: 1,
+          explication: "Proxima du Centaure est à 4,24 al. Andromède est une galaxie, et la Lune est le satellite de la Terre."
+        }
+      ]);
+    });
+  </script>
+</body>
+</html>
