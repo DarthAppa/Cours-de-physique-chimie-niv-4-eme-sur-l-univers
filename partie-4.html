@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>L'année-lumière</title>
+  <meta name="description" content="Partie 4 : l'année-lumière, unité de distance, et pourquoi regarder loin, c'est regarder dans le passé.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230F1433%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%276%27 fill=%27none%27 stroke=%27%23FF5D72%27 stroke-width=%273%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%271.8%27 fill=%27%23FF5D72%27/%3E%3C/svg%3E">
+  <meta property="og:title" content="L'année-lumière">
+  <meta property="og:description" content="Partie 4 : l'année-lumière, unité de distance, et pourquoi regarder loin, c'est regarder dans le passé.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/annee.js" defer></script>
+</head>
+<body data-partie="4">
+  <header id="barre" class="barre enveloppe"></header>
+
+  <main>
+    <section class="partie-tete enveloppe">
+      <div class="large">
+        <p class="surtitre">Partie 4 sur 9</p>
+        <h1>L'année-lumière</h1>
+        <p class="chapeau colonne" style="margin-inline:0">Une année-lumière n'est pas une durée : c'est une distance. Celle que la lumière parcourt en un an. Et elle cache une idée vertigineuse : plus on regarde loin, plus on voit le passé.</p>
+      </div>
+    </section>
+
+    <section class="enveloppe" aria-labelledby="titre-prediction">
+      <div class="large">
+        <div class="prediction colonne" style="margin-inline:0">
+          <p class="etiquette" id="titre-prediction">Avant de commencer, fais une prédiction</p>
+          <p>Combien de <strong>milliards de kilomètres</strong> la lumière parcourt-elle en une année ?</p>
+          <div class="prediction-saisie">
+            <input id="prediction-champ" type="text" inputmode="decimal" placeholder="en milliards de km" aria-label="Ta prédiction en milliards de kilomètres">
+            <button type="button" class="bouton discret" id="prediction-valider" data-cible="9460">Voir la réponse</button>
+          </div>
+          <div class="prediction-reponse" id="prediction-reponse" hidden aria-live="polite">
+            <p><strong class="debut"></strong> Environ <strong>9 460 milliards de km</strong>. C'est 63 000 fois la distance entre la Terre et le Soleil. Le calcul est juste en dessous.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-calcul">
+      <div class="colonne">
+        <h2 id="titre-calcul">Calculer une année-lumière</h2>
+        <p>On part de la vitesse de la lumière, 300 000 km par seconde, et on avance pas à pas, de la seconde jusqu'à l'année.</p>
+        <ol class="escalier" id="escalier">
+          <li hidden><span>En 1 seconde</span><strong>300 000 km</strong></li>
+          <li hidden><span>En 1 minute : 300 000 × 60</span><strong>18 millions de km</strong></li>
+          <li hidden><span>En 1 heure : 18 000 000 × 60</span><strong>1,08 milliard de km</strong></li>
+          <li hidden><span>En 1 jour : 1 080 000 000 × 24</span><strong>25,9 milliards de km</strong></li>
+          <li hidden><span>En 1 an : 25 920 000 000 × 365,25</span><strong>≈ 9 460 milliards de km</strong></li>
+        </ol>
+        <p><button type="button" class="bouton" id="esc-suivant">Commencer le calcul</button></p>
+        <p class="astuce"><strong>1 année-lumière (al) ≈ 9 460 milliards de km.</strong> C'est une unité de distance, comme le kilomètre, mais bien plus grande.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-convertisseur">
+      <div class="colonne">
+        <h2 id="titre-convertisseur">Le convertisseur</h2>
+        <p>Tape une distance dans une case : l'autre se calcule toute seule.</p>
+        <div class="convertisseur">
+          <label class="conv-case">Années-lumière<input id="conv-al" type="text" inputmode="decimal" class="champ"></label>
+          <span class="conv-egal" aria-hidden="true">=</span>
+          <label class="conv-case">Kilomètres<input id="conv-km" type="text" inputmode="decimal" class="champ"></label>
+        </div>
+        <p id="conv-mots" class="conv-mots" aria-live="polite"></p>
+        <div class="etapes clair" aria-label="Exemples">
+          <button type="button" data-al="1">1 al</button>
+          <button type="button" data-al="4.24">Proxima du Centaure</button>
+          <button type="button" data-al="8.6">Sirius</button>
+          <button type="button" data-al="26000">Centre de la Voie lactée</button>
+          <button type="button" data-al="2500000">Andromède</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-machine">
+      <div class="large">
+        <h2 id="titre-machine" style="margin-block:1.6rem 1rem">La machine à remonter le temps</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">La lumière met du temps à nous parvenir. Quand tu regardes un astre, tu le vois tel qu'il était au moment où sa lumière est partie. Choisis un astre.</p>
+        <div class="observatoire machine">
+          <div class="ecran">
+            <div class="machine-vue">
+              <p class="machine-surtitre">Tu regardes</p>
+              <p class="machine-nom" id="machine-nom"></p>
+              <p class="machine-phrase" id="machine-phrase" aria-live="polite"></p>
+              <p class="machine-date" id="machine-date" aria-hidden="true"></p>
+              <div class="frise" id="machine-frise" aria-hidden="true"><span class="frise-axe"></span></div>
+              <p class="frise-legende">Ancienneté de la lumière reçue (échelle qui grandit par dix)</p>
+            </div>
+          </div>
+          <div class="panneau">
+            <dl class="mesures">
+              <div><dt>Distance</dt><dd id="machine-distance"></dd></div>
+              <div><dt>Sa lumière est partie</dt><dd id="machine-depart"></dd></div>
+              <div><dt>À ce moment-là, sur Terre</dt><dd id="machine-terre"></dd></div>
+            </dl>
+          </div>
+          <div class="commandes"><div class="etapes" id="machine-choix" aria-label="Choisir un astre"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-exercice">
+      <div class="colonne">
+        <h2 id="titre-exercice">À toi de calculer</h2>
+        <p>Sirius, l'étoile la plus brillante du ciel nocturne, est à <strong>8,6 al</strong>. À combien de <strong>milliards de km</strong> cela correspond-il ?</p>
+        <div class="prediction-saisie" style="margin-top:1rem">
+          <input id="ex-reponse" type="text" inputmode="decimal" placeholder="en milliards de km" aria-label="Ta réponse en milliards de kilomètres" class="champ">
+          <button type="button" class="bouton" id="ex-verifier">Vérifier</button>
+          <button type="button" class="bouton discret" id="ex-indice">Un indice</button>
+        </div>
+        <p id="ex-aide" class="astuce" hidden>1 al ≈ 9 460 milliards de km. Pour 8,6 al, on multiplie : 8,6 × 9 460.</p>
+        <p id="ex-retour" class="ex-retour" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-retenir">
+      <div class="colonne">
+        <h2 id="titre-retenir">Ce qu'il faut retenir</h2>
+        <p>L'<strong>année-lumière (al)</strong> est la distance parcourue par la lumière dans le vide en une année : <strong>environ 9 460 milliards de km</strong>.</p>
+        <p>C'est une unité de <strong>distance</strong>, pas de durée. On l'utilise au-delà du système solaire, car en kilomètres les nombres deviendraient énormes.</p>
+        <p>Pour convertir : <strong>distance en km = distance en al × 9 460 milliards</strong>, et inversement on divise.</p>
+        <p>Une étoile située à 100 al nous envoie une lumière partie il y a 100 ans : <strong>regarder loin, c'est regarder dans le passé</strong>. Les télescopes sont de véritables machines à remonter le temps.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-quiz">
+      <div class="colonne">
+        <h2 id="titre-quiz">Mini-quiz</h2>
+        <p class="texte-doux" style="margin-bottom:1.4rem">Cinq questions pour vérifier que tu as bien compris.</p>
+        <div id="quiz"></div>
+      </div>
+    </section>
+
+    <nav class="suite enveloppe" aria-label="Navigation entre les parties">
+      <div class="large" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;width:100%">
+        <a class="bouton discret" href="partie-3.html">Partie 3 : La lumière, messagère du ciel</a>
+        <span class="bientot">Partie 5 : L'histoire de l'Univers, en préparation</span>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="pied enveloppe">
+    <div class="large">Physique-chimie, cycle 4, niveau 4e. Valeurs arrondies. Les distances de l'étoile Polaire et de Bételgeuse sont encore mal connues : ce sont des estimations.</div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.Univers.quiz("quiz", [
+        {
+          q: "L'année-lumière est une unité de…",
+          choix: ["durée", "distance", "vitesse", "masse"],
+          bonne: 1,
+          explication: "Malgré son nom, l'année-lumière mesure une distance : celle parcourue par la lumière en un an."
+        },
+        {
+          q: "Une année-lumière vaut environ…",
+          choix: ["300 000 km", "150 millions de km", "9 460 milliards de km", "13,8 milliards de km"],
+          bonne: 2,
+          explication: "300 000 km/s × le nombre de secondes dans une année ≈ 9 460 milliards de km."
+        },
+        {
+          q: "Proxima du Centaure est à 4,24 al. Sa lumière met donc…",
+          choix: ["4,24 secondes pour nous parvenir", "4,24 jours", "4,24 ans", "4 240 ans"],
+          bonne: 2,
+          explication: "Un astre situé à X années-lumière nous envoie une lumière qui a voyagé pendant X années."
+        },
+        {
+          q: "La galaxie d'Andromède est à 2,5 millions d'al. Quand on l'observe, on la voit…",
+          choix: ["telle qu'elle est aujourd'hui", "telle qu'elle était il y a 2,5 millions d'années", "telle qu'elle sera dans 2,5 millions d'années", "telle qu'elle était il y a 2,5 ans"],
+          bonne: 1,
+          explication: "Sa lumière est partie il y a 2,5 millions d'années : regarder loin, c'est regarder dans le passé."
+        },
+        {
+          q: "Pourquoi les astronomes utilisent-ils l'année-lumière plutôt que le kilomètre ?",
+          choix: ["Parce que c'est plus précis", "Parce que les nombres en km seraient beaucoup trop grands", "Parce que le kilomètre n'existe pas dans l'espace", "Parce que la lumière ne se mesure pas en km"],
+          bonne: 1,
+          explication: "Dire « 4,24 al » est bien plus pratique que « 40 000 milliards de km ». C'est le même principe que les mm, m et km sur Terre."
+        }
+      ]);
+    });
+  </script>
+</body>
+</html>
