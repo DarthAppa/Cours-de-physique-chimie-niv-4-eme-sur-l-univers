@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>L'histoire de l'Univers</title>
+  <meta name="description" content="Partie 5 : du Big Bang à aujourd'hui, le calendrier cosmique et l'expansion de l'Univers.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230F1433%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%276%27 fill=%27none%27 stroke=%27%23FF5D72%27 stroke-width=%273%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%271.8%27 fill=%27%23FF5D72%27/%3E%3C/svg%3E">
+  <meta property="og:title" content="L'histoire de l'Univers">
+  <meta property="og:description" content="Partie 5 : du Big Bang à aujourd'hui, le calendrier cosmique et l'expansion de l'Univers.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Big+Shoulders+Display:wght@700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/histoire.js" defer></script>
+</head>
+<body data-partie="5">
+  <header id="barre" class="barre enveloppe"></header>
+
+  <main>
+    <section class="partie-tete enveloppe">
+      <div class="large">
+        <p class="surtitre">Partie 5 sur 9</p>
+        <h1>L'histoire de l'Univers</h1>
+        <p class="chapeau colonne" style="margin-inline:0">Il y a 13,8 milliards d'années, l'Univers était minuscule, brûlant et sans étoiles. Comment est-il devenu le ciel rempli de galaxies que nous observons aujourd'hui ?</p>
+      </div>
+    </section>
+
+    <section class="enveloppe" aria-labelledby="titre-prediction">
+      <div class="large">
+        <div class="prediction colonne" style="margin-inline:0">
+          <p class="etiquette" id="titre-prediction">Avant de commencer, fais une prédiction</p>
+          <p>Imagine que toute l'histoire de l'Univers tienne en <strong>une seule année</strong> : le Big Bang le 1er janvier à minuit, aujourd'hui le 31 décembre à minuit. En quel mois naît le Soleil ? Donne le numéro du mois (1 = janvier, 12 = décembre).</p>
+          <div class="prediction-saisie">
+            <input id="prediction-champ" type="text" inputmode="numeric" placeholder="de 1 à 12" aria-label="Ta prédiction : numéro du mois">
+            <button type="button" class="bouton discret" id="prediction-valider" data-cible="9">Voir la réponse</button>
+          </div>
+          <div class="prediction-reponse" id="prediction-reponse" hidden aria-live="polite">
+            <p><strong class="debut"></strong> Le Soleil naît le <strong>1er septembre</strong>. Et les premiers humains n'apparaissent que le 31 décembre, onze minutes avant minuit ! C'est le calendrier cosmique, que tu retrouveras plus bas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-film">
+      <div class="large">
+        <h2 id="titre-film" style="margin-block:1.6rem 1rem">Le film de l'Univers</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Lance le film ou choisis une étape. Observe comment l'Univers se dilate, refroidit, puis s'illumine d'étoiles et de galaxies.</p>
+        <div class="observatoire">
+          <div class="ecran"><canvas id="film" role="img" aria-label="Le Big Bang."></canvas></div>
+          <div class="panneau" aria-live="polite">
+            <p class="panneau-niveau" id="film-num">Étape 1</p>
+            <h3 id="film-nom">Le Big Bang</h3>
+            <p id="film-texte"></p>
+            <dl class="mesures">
+              <div><dt>Après le Big Bang</dt><dd id="film-apres"></dd></div>
+              <div><dt>Il y a</dt><dd id="film-ilya"></dd></div>
+              <div><dt>Dans le calendrier cosmique</dt><dd id="film-calendrier"></dd></div>
+            </dl>
+          </div>
+          <div class="commandes">
+            <div class="curseur-ligne">
+              <label for="film-curseur">Big Bang</label>
+              <input type="range" id="film-curseur" min="0" max="1000" step="1" value="0">
+              <label for="film-curseur">Aujourd'hui</label>
+            </div>
+            <div class="etapes" id="film-choix" aria-label="Choisir une étape"></div>
+            <div class="etapes actions"><button type="button" class="lecture" id="film-lecture">Lancer le film (40 s)</button></div>
+          </div>
+        </div>
+        <p class="texte-doux colonne" style="margin:1rem 0 0;font-size:0.9rem">Le film va très vite au début : en 15 secondes, on passe de quelques secondes après le Big Bang à 1 milliard d'années. Les 12,8 milliards d'années suivantes défilent ensuite régulièrement.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-calendrier">
+      <div class="colonne">
+        <h2 id="titre-calendrier">Le calendrier cosmique</h2>
+        <p>Les 13,8 milliards d'années de l'Univers sont ramenées à une seule année. Un jour du calendrier vaut alors environ 38 millions d'années.</p>
+        <div class="tableau-conteneur" style="margin-top:1.2rem">
+          <table>
+            <thead><tr><th scope="col">Événement</th><th scope="col">Quand</th><th scope="col">Date du calendrier</th></tr></thead>
+            <tbody id="cal-corps"></tbody>
+          </table>
+        </div>
+        <p class="astuce">Toute l'histoire écrite de l'humanité, depuis l'invention de l'écriture il y a environ 5 000 ans, tient dans les <strong>12 dernières secondes</strong> du 31 décembre.</p>
+      </div>
+    </section>
+
+    <section class="instrument enveloppe" aria-labelledby="titre-expansion">
+      <div class="large">
+        <h2 id="titre-expansion" style="margin-block:1.6rem 1rem">L'Univers en expansion</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Depuis le Big Bang, l'espace entre les galaxies grandit. Fais avancer le temps et regarde comment les distances changent, puis change de point de vue.</p>
+        <div class="observatoire expansion">
+          <div class="ecran"><canvas id="expansion" role="img" aria-label="Des galaxies qui s'éloignent les unes des autres quand l'espace se dilate."></canvas></div>
+          <div class="panneau">
+            <p class="panneau-niveau" id="exp-titre">Vu depuis la Voie lactée</p>
+            <div class="tableau-conteneur">
+              <table class="tableau-sombre">
+                <thead><tr><th scope="col">Galaxie</th><th scope="col">Départ</th><th scope="col">Ensuite</th><th scope="col">Éloignement</th></tr></thead>
+                <tbody id="exp-corps"></tbody>
+              </table>
+            </div>
+            <p class="texte-doux" style="font-size:0.78rem">Distances en millions d'années-lumière (M al).</p>
+            <p id="exp-message" aria-live="polite"></p>
+          </div>
+          <div class="commandes">
+            <div class="curseur-ligne">
+              <label for="exp-curseur">Avant</label>
+              <input type="range" id="exp-curseur" min="1" max="2" step="0.01" value="1">
+              <label for="exp-curseur">Après</label>
+            </div>
+            <div class="etapes actions">
+              <button type="button" class="lecture" id="exp-animer">Faire passer le temps</button>
+              <button type="button" class="son" id="exp-vue" aria-pressed="false">Se placer sur la galaxie B</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-experience">
+      <div class="colonne">
+        <h2 id="titre-experience">L'expérience du ballon</h2>
+        <p>À faire en classe ou à la maison, avec un ballon de baudruche et un feutre.</p>
+        <ol class="liste-etapes">
+          <li>Gonfle un peu le ballon et dessine dessus une dizaine de petites galaxies.</li>
+          <li>Choisis-en une : c'est la Voie lactée. Mesure avec un fil sa distance à deux autres galaxies, une proche et une lointaine.</li>
+          <li>Gonfle davantage le ballon, puis mesure à nouveau.</li>
+          <li>Compare : toutes les galaxies se sont éloignées, et la plus lointaine s'est éloignée le plus.</li>
+        </ol>
+        <p>Les galaxies dessinées n'ont pas bougé sur le ballon : c'est la surface du ballon qui s'est étirée. De même, ce sont les galaxies qui « ne bougent pas » dans l'espace, et l'espace qui grandit.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-retenir">
+      <div class="colonne">
+        <h2 id="titre-retenir">Ce qu'il faut retenir</h2>
+        <p>L'Univers a environ <strong>13,8 milliards d'années</strong>. Au début, il était extrêmement <strong>chaud et dense</strong> : c'est le <strong>Big Bang</strong>.</p>
+        <p>Depuis, l'Univers est en <strong>expansion</strong> : l'espace se dilate, et en se dilatant il <strong>se refroidit</strong>. Les galaxies s'éloignent les unes des autres, d'autant plus vite qu'elles sont loin.</p>
+        <p>Les premiers atomes, l'<strong>hydrogène</strong> et l'<strong>hélium</strong>, se forment très tôt. Puis la <strong>gravitation</strong> rassemble la matière : naissent les étoiles, puis les galaxies.</p>
+        <p>Le <strong>Soleil</strong> et la <strong>Terre</strong> sont bien plus jeunes que l'Univers : ils se sont formés il y a environ <strong>4,6 milliards d'années</strong>.</p>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-vocabulaire">
+      <div class="colonne">
+        <h2 id="titre-vocabulaire">Le vocabulaire</h2>
+        <dl class="vocabulaire">
+          <div><dt>Big Bang</dt><dd>Nom donné au début de l'histoire de l'Univers, quand il était très chaud et très dense, il y a 13,8 milliards d'années.</dd></div>
+          <div><dt>Expansion</dt><dd>Agrandissement de l'espace : les distances entre les galaxies augmentent avec le temps.</dd></div>
+          <div><dt>Fond diffus cosmologique</dt><dd>La plus ancienne lumière de l'Univers, émise 380 000 ans après le Big Bang. On l'observe encore dans toutes les directions du ciel.</dd></div>
+          <div><dt>Gravitation</dt><dd>Attraction entre tous les objets qui ont une masse. C'est elle qui forme les étoiles et les galaxies. Elle est étudiée en détail dans la partie 8.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="bloc enveloppe" aria-labelledby="titre-quiz">
+      <div class="colonne">
+        <h2 id="titre-quiz">Mini-quiz</h2>
+        <p class="texte-doux" style="margin-bottom:1.4rem">Cinq questions pour vérifier que tu as bien compris.</p>
+        <div id="quiz"></div>
+      </div>
+    </section>
+
+    <nav class="suite enveloppe" aria-label="Navigation entre les parties">
+      <div class="large" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;width:100%">
+        <a class="bouton discret" href="partie-4.html">Partie 4 : L'année-lumière</a>
+        <span class="bientot">Partie 6 : Poussières d'étoiles, en préparation</span>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="pied enveloppe">
+    <div class="large">Physique-chimie, cycle 4, niveau 4e. Dates arrondies, d'après les connaissances actuelles en cosmologie. Le calendrier cosmique est une idée popularisée par l'astronome Carl Sagan. La simulation d'expansion est un modèle simplifié.</div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.Univers.quiz("quiz", [
+        {
+          q: "Quel est l'âge de l'Univers ?",
+          choix: ["4,6 milliards d'années", "13,8 milliards d'années", "13,8 millions d'années", "Il a toujours existé"],
+          bonne: 1,
+          explication: "L'Univers a environ 13,8 milliards d'années. 4,6 milliards d'années, c'est l'âge du Soleil et de la Terre."
+        },
+        {
+          q: "Au moment du Big Bang, l'Univers était…",
+          choix: ["froid et vide", "très chaud et très dense", "rempli d'étoiles", "de la taille de la Voie lactée"],
+          bonne: 1,
+          explication: "Au début, toute la matière était serrée et extrêmement chaude. L'Univers s'est ensuite dilaté et refroidi."
+        },
+        {
+          q: "Quels sont les premiers éléments chimiques formés après le Big Bang ?",
+          choix: ["Le fer et l'or", "L'oxygène et le carbone", "L'hydrogène et l'hélium", "Le silicium et l'aluminium"],
+          bonne: 2,
+          explication: "L'hydrogène et l'hélium, les plus légers, se forment dans les premières minutes. Les autres seront fabriqués plus tard dans les étoiles (partie 6)."
+        },
+        {
+          q: "Que signifie « l'Univers est en expansion » ?",
+          choix: ["Les galaxies tombent vers la Voie lactée", "L'espace entre les galaxies grandit", "Il y a de plus en plus d'étoiles", "La Terre grossit"],
+          bonne: 1,
+          explication: "C'est l'espace lui-même qui se dilate : les galaxies s'éloignent les unes des autres, d'autant plus vite qu'elles sont loin."
+        },
+        {
+          q: "Dans quel ordre ces éléments sont-ils apparus ?",
+          choix: [
+            "Terre, Soleil, galaxies, premières étoiles",
+            "Premiers atomes, premières étoiles, Voie lactée, Soleil",
+            "Soleil, premiers atomes, Voie lactée, Terre",
+            "Premières étoiles, premiers atomes, Soleil, Voie lactée"
+          ],
+          bonne: 1,
+          explication: "Les atomes d'abord (380 000 ans), puis les étoiles (200 millions d'années), la Voie lactée (vers 1 milliard d'années) et enfin le Soleil (il y a 4,6 milliards d'années)."
+        }
+      ]);
+    });
+  </script>
+</body>
+</html>

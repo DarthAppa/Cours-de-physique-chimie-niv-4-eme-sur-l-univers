@@ -12,7 +12,7 @@
     { n: 2, titre: "Le système solaire", question: "Qui tourne autour de qui, et à quelle distance ?", fichier: "partie-2.html", prete: true },
     { n: 3, titre: "La lumière, messagère du ciel", question: "Combien de temps la lumière met-elle pour nous parvenir ?", fichier: "partie-3.html", prete: true },
     { n: 4, titre: "L'année-lumière", question: "Pourquoi regarder loin, c'est regarder dans le passé ?", fichier: "partie-4.html", prete: true },
-    { n: 5, titre: "L'histoire de l'Univers", question: "Que s'est-il passé depuis le Big Bang ?", fichier: "partie-5.html", prete: false },
+    { n: 5, titre: "L'histoire de l'Univers", question: "Que s'est-il passé depuis le Big Bang ?", fichier: "partie-5.html", prete: true },
     { n: 6, titre: "Poussières d'étoiles", question: "D'où viennent les atomes qui nous composent ?", fichier: "partie-6.html", prete: false },
     { n: 7, titre: "La naissance du système solaire", question: "Comment la Terre s'est-elle formée, et quand ?", fichier: "partie-7.html", prete: false },
     { n: 8, titre: "La gravitation universelle", question: "Quelle force tient les planètes sur leur orbite ?", fichier: "partie-8.html", prete: false },

@@ -506,6 +506,18 @@ a.partie .partie-num { color: var(--halpha); }
   .frise-grad:nth-of-type(even) { display: none; }
 }
 
+/* Partie 5 : film, expansion, expérience */
+#film-choix button[aria-current="true"] { background: #D9304D; border-color: #D9304D; color: #fff; }
+.observatoire.expansion .ecran canvas { aspect-ratio: 16 / 10; }
+.tableau-sombre { font-size: 0.82rem; }
+.tableau-sombre th { color: #9895BC; padding: 0.35rem 0.4rem; border-bottom-color: #262E66; }
+.tableau-sombre td { color: #ECE9F7; padding: 0.4rem; border-bottom-color: #262E66; }
+#exp-message { color: #ECE9F7 !important; font-size: 0.92rem; }
+#exp-message strong { color: #FFD08A; }
+#exp-vue[aria-pressed="true"] { background: #F5C451; color: #070A1E; }
+.liste-etapes { margin: 1rem 0; padding-left: 1.4rem; display: grid; gap: 0.5rem; }
+.liste-etapes li::marker { color: var(--halpha); font-weight: 700; }
+
 /* Emboîtement */
 .emboitement { display: grid; gap: 0; }
 .boite {
