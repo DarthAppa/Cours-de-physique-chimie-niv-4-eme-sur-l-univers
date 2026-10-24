@@ -22,4 +22,6 @@ Docs/
 
 ## Publication
 
-La mise en ligne se fait avec `/publier message du commit`.
+Le cours est en ligne : https://darthappa.github.io/Univers-4eme/
+
+Il se met à jour tout seul à chaque push sur `main` (GitHub Actions, fichier `.github/workflows/pages.yml`). Seuls les pages HTML et `assets/` sont publiés : `Docs/` reste privé au dépôt.

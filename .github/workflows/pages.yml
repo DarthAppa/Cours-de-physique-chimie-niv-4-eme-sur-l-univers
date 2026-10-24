@@ -1,0 +1,57 @@
+# Mise en ligne du cours sur GitHub Pages (darthappa.github.io/Univers-4eme) à chaque push sur main.
+# Le cours est en HTML, CSS et JS simples : rien à construire, on publie seulement les fichiers du site
+# (les pages HTML et assets/), sans Docs/ ni README.md.
+# Réglage GitHub nécessaire : Settings › Pages › Source = « GitHub Actions ».
+name: Mise en ligne
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Une seule mise en ligne à la fois ; on ne coupe pas celle qui est en cours
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  preparer:
+    name: preparer
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Rassembler les fichiers du site (_site/)
+        run: |
+          mkdir -p _site
+          cp *.html _site/
+          cp -r assets _site/
+          touch _site/.nojekyll
+          ls -R _site | head -50
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  publier:
+    name: publier
+    needs: preparer
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v5
