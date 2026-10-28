@@ -507,7 +507,6 @@ a.partie .partie-num { color: var(--halpha); }
 }
 
 /* Partie 5 : film, expansion, expérience */
-#film-choix button[aria-current="true"] { background: #D9304D; border-color: #D9304D; color: #fff; }
 .observatoire.expansion .ecran canvas { aspect-ratio: 16 / 10; }
 .tableau-sombre { font-size: 0.82rem; }
 .tableau-sombre th { color: #9895BC; padding: 0.35rem 0.4rem; border-bottom-color: #262E66; }
@@ -517,6 +516,76 @@ a.partie .partie-num { color: var(--halpha); }
 #exp-vue[aria-pressed="true"] { background: #F5C451; color: #070A1E; }
 .liste-etapes { margin: 1rem 0; padding-left: 1.4rem; display: grid; gap: 0.5rem; }
 .liste-etapes li::marker { color: var(--halpha); font-weight: 700; }
+
+/* Partie 5 : frise 3D */
+.scene3d-ecran { position: relative; overflow: hidden; background: #000; }
+.scene3d-ecran canvas { display: block; width: 100%; aspect-ratio: 16 / 10; }
+.scene-etiquettes { position: absolute; inset: 0; pointer-events: none; }
+.etiq3d { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 0.82rem; font-weight: 700; color: #ECE9F7; padding: 0.15rem 0.5rem; border-radius: 4px; background: rgba(7,10,30,0.6); transition: opacity 0.4s; }
+.etiq3d.chaud { color: #FFD08A; }
+.scene-cartouche { position: absolute; left: 0.9rem; top: 0.8rem; margin: 0; display: grid; gap: 0.1rem; pointer-events: none; }
+.scene-cartouche strong { font-family: var(--f-titre); font-size: clamp(1.3rem, 3vw, 2rem); line-height: 1; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+.scene-cartouche span { font-size: 0.85rem; color: #FFD08A; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
+.scene-voile { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity 0.35s; }
+.scene-voile.noir { opacity: 1; }
+.scene-erreur { position: absolute; inset: auto 1rem 1rem; margin: 0; padding: 0.8rem 1rem; border-radius: var(--rayon); background: rgba(7,10,30,0.85); color: #ECE9F7; }
+.frise-camera { display: block; width: 100%; height: 128px; cursor: pointer; border-radius: 4px; }
+.frise-camera:focus-visible { outline: 3px solid #45D3C6; outline-offset: 2px; }
+#frise-lecture[aria-pressed="true"] { background: #F5C451; color: #070A1E; }
+@media (max-width: 560px) { .scene3d-ecran canvas { aspect-ratio: 4 / 4.2; } }
+
+/* Partie 5 : frise chronologique */
+.frise-commandes { gap: 0.5rem; }
+.frise-titre { margin: 0.4rem 0 0; font-size: 0.85rem; font-weight: 700; color: #ECE9F7; }
+.frise-titre span { font-weight: 400; color: #9895BC; }
+.frise-totale, .frise-loupe { position: relative; margin: 0.2rem 0.6rem 0; }
+.frise-totale { height: 3.6rem; }
+.frise-loupe { --haut: 104px; height: calc(var(--haut) + 2.4rem); margin-top: 0.4rem; }
+.frise .frise-ligne { position: absolute; left: 0; right: 0; height: 4px; border-radius: 2px; background: linear-gradient(90deg, #FFB45C, #8E7CFF 20%, #45D3C6 70%, #FF5D72); }
+.frise-totale .frise-ligne { top: 1.2rem; }
+.frise-loupe .frise-ligne { top: calc(var(--haut) - 8px); }
+.frise .frise-graduation { position: absolute; transform: translateX(-50%); font-size: 0.68rem; color: #9895BC; white-space: nowrap; }
+.frise-totale .frise-graduation { top: 2.1rem; }
+.frise-loupe .frise-graduation { top: calc(var(--haut) + 6px); }
+.frise .frise-graduation.debut { transform: none; }
+.frise .frise-graduation.fin { transform: translateX(-100%); }
+.frise-zone {
+  position: absolute; top: 0.25rem; height: 2rem; min-width: 22px; padding: 0;
+  border: 2px solid #F5C451; border-radius: 6px; background: rgba(245,196,81,0.12); cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: center; color: #F5C451; font: inherit; font-size: 0.7rem; font-weight: 700;
+}
+.frise-zone span { transform: translateY(-1.15rem); }
+.frise-zone[aria-pressed="true"] { background: rgba(245,196,81,0.35); }
+.frise-mini { position: absolute; top: 1.05rem; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: #fff; pointer-events: none; }
+.frise-mini.actif { width: 13px; height: 13px; margin-left: -6.5px; top: 0.8rem; background: #FF5D72; box-shadow: 0 0 10px #FF5D72; }
+.frise-evt {
+  position: absolute; top: 0; height: var(--haut); transform: translateX(-50%); padding: 0; border: 0; background: none; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end; color: #ECE9F7; font: inherit;
+}
+.frise-evt::before { content: ""; position: absolute; bottom: 0.55rem; width: 1px; height: var(--tige, 18px); background: rgba(236,233,247,0.35); }
+.frise-evt-point { width: 12px; height: 12px; border-radius: 50%; background: #070A1E; border: 2px solid #ECE9F7; order: 2; }
+.frise-evt-nom { order: 1; font-size: 0.75rem; font-weight: 700; white-space: nowrap; padding: 0.1rem 0.4rem; border-radius: 4px; background: #111743; border: 1px solid #323C78; }
+.frise-evt.vers-gauche { transform: translateX(calc(-100% + 7px)); align-items: flex-end; }
+.frise-evt.vers-gauche::before { right: 6px; }
+.frise-evt.vers-droite { transform: translateX(-7px); align-items: flex-start; }
+.frise-evt.vers-droite::before { left: 6px; }
+.frise-evt { pointer-events: none; }
+.frise-evt-nom, .frise-evt-point { pointer-events: auto; }
+.frise-evt:focus-visible .frise-evt-nom { outline: 3px solid #45D3C6; outline-offset: 2px; }
+.frise-evt:focus-visible { outline: none; }
+.frise-evt:hover .frise-evt-nom { border-color: #FF5D72; }
+.frise-evt[aria-pressed="true"] .frise-evt-point { background: #FF5D72; border-color: #fff; box-shadow: 0 0 10px #FF5D72; }
+.frise-evt[aria-pressed="true"] .frise-evt-nom { background: #D9304D; border-color: #D9304D; color: #fff; }
+.frise-commandes .frise-legende { margin: 0 0.6rem; }
+.frise-liste summary { cursor: pointer; font-size: 0.85rem; color: #C9C6E4; margin-top: 0.4rem; }
+.frise-liste .etapes { margin-top: 0.6rem; }
+#frise-choix button[aria-current="true"] { background: #D9304D; border-color: #D9304D; color: #fff; }
+.frise-defile { overflow-x: auto; padding-bottom: 0.3rem; }
+@media (max-width: 680px) {
+  .frise-defile .frise-loupe { min-width: 620px; }
+  .frise-totale .frise-graduation.secondaire { display: none; }
+  .frise-evt-nom { font-size: 0.7rem; }
+}
 
 /* Emboîtement */
 .emboitement { display: grid; gap: 0; }

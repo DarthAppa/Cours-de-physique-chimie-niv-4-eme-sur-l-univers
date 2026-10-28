@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/site.js" defer></script>
   <script src="assets/js/histoire.js" defer></script>
+  <script src="assets/vendor/three.min.js" defer></script>
+  <script src="assets/js/frise3d.js?v=7" defer></script>
 </head>
 <body data-partie="5">
   <header id="barre" class="barre enveloppe"></header>
@@ -44,14 +46,20 @@
       </div>
     </section>
 
-    <section class="instrument enveloppe" aria-labelledby="titre-film">
+    <section class="instrument enveloppe" aria-labelledby="titre-frise">
       <div class="large">
-        <h2 id="titre-film" style="margin-block:1.6rem 1rem">Le film de l'Univers</h2>
-        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Lance le film ou choisis une étape. Observe comment l'Univers se dilate, refroidit, puis s'illumine d'étoiles et de galaxies.</p>
-        <div class="observatoire">
-          <div class="ecran"><canvas id="film" role="img" aria-label="Le Big Bang."></canvas></div>
+        <h2 id="titre-frise" style="margin-block:1.6rem 1rem">La frise de l'Univers</h2>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Voyage du Big Bang à aujourd'hui. À chaque événement, la frise glisse et zoome à la bonne échelle de temps, et la scène te montre ce qui se passe. Utilise « Suivant », la lecture automatique, ou clique sur un événement de la frise.</p>
+        <div class="observatoire histoire3d">
+          <div class="ecran scene3d-ecran">
+            <canvas id="scene3d" role="img" aria-label="Le Big Bang."></canvas>
+            <div class="scene-etiquettes" id="scene-etiquettes" aria-hidden="true"></div>
+            <p class="scene-cartouche" aria-hidden="true"><strong id="scene-titre">Le Big Bang</strong><span id="scene-date"></span></p>
+            <div class="scene-voile" id="scene-voile" aria-hidden="true"></div>
+            <p class="scene-erreur" id="scene-erreur" hidden>Ton navigateur ne peut pas afficher la 3D. La frise et les fiches fonctionnent quand même.</p>
+          </div>
           <div class="panneau" aria-live="polite">
-            <p class="panneau-niveau" id="film-num">Étape 1</p>
+            <p class="panneau-niveau" id="film-num">Événement 1</p>
             <h3 id="film-nom">Le Big Bang</h3>
             <p id="film-texte"></p>
             <dl class="mesures">
@@ -60,17 +68,19 @@
               <div><dt>Dans le calendrier cosmique</dt><dd id="film-calendrier"></dd></div>
             </dl>
           </div>
-          <div class="commandes">
-            <div class="curseur-ligne">
-              <label for="film-curseur">Big Bang</label>
-              <input type="range" id="film-curseur" min="0" max="1000" step="1" value="0">
-              <label for="film-curseur">Aujourd'hui</label>
+          <div class="commandes frise-commandes">
+            <canvas class="frise-camera" id="frise-camera" tabindex="0" aria-label="Frise du temps. Flèches gauche et droite pour changer d'événement."></canvas>
+            <div class="etapes actions">
+              <button type="button" class="lecture" id="frise-prec">Précédent</button>
+              <button type="button" class="lecture" id="frise-suiv">Suivant</button>
+              <button type="button" class="son" id="frise-lecture" aria-pressed="false">Lecture automatique</button>
             </div>
-            <div class="etapes" id="film-choix" aria-label="Choisir une étape"></div>
-            <div class="etapes actions"><button type="button" class="lecture" id="film-lecture">Lancer le film (40 s)</button></div>
+            <details class="frise-liste">
+              <summary>Aller directement à un événement</summary>
+              <div class="etapes" id="frise-choix" aria-label="Choisir un événement"></div>
+            </details>
           </div>
         </div>
-        <p class="texte-doux colonne" style="margin:1rem 0 0;font-size:0.9rem">Le film va très vite au début : en 15 secondes, on passe de quelques secondes après le Big Bang à 1 milliard d'années. Les 12,8 milliards d'années suivantes défilent ensuite régulièrement.</p>
       </div>
     </section>
 
@@ -91,14 +101,18 @@
     <section class="instrument enveloppe" aria-labelledby="titre-expansion">
       <div class="large">
         <h2 id="titre-expansion" style="margin-block:1.6rem 1rem">L'Univers en expansion</h2>
-        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Depuis le Big Bang, l'espace entre les galaxies grandit. Fais avancer le temps et regarde comment les distances changent, puis change de point de vue.</p>
+        <p class="texte-doux colonne" style="margin:0 0 1.2rem">Pars du Big Bang et avance jusqu'à aujourd'hui. Regarde les distances entre les galaxies grandir, puis change de point de vue.</p>
         <div class="observatoire expansion">
-          <div class="ecran"><canvas id="expansion" role="img" aria-label="Des galaxies qui s'éloignent les unes des autres quand l'espace se dilate."></canvas></div>
+          <div class="ecran"><canvas id="expansion" role="img" aria-label="Des galaxies qui s'éloignent les unes des autres quand l'espace se dilate, depuis le Big Bang."></canvas></div>
           <div class="panneau">
             <p class="panneau-niveau" id="exp-titre">Vu depuis la Voie lactée</p>
+            <dl class="mesures">
+              <div><dt>Moment</dt><dd id="exp-temps"></dd></div>
+              <div><dt>Les distances valent</dt><dd><span id="exp-pourcent"></span> de celles d'aujourd'hui</dd></div>
+            </dl>
             <div class="tableau-conteneur">
               <table class="tableau-sombre">
-                <thead><tr><th scope="col">Galaxie</th><th scope="col">Départ</th><th scope="col">Ensuite</th><th scope="col">Éloignement</th></tr></thead>
+                <thead><tr><th scope="col">Galaxie</th><th scope="col">À ce moment</th><th scope="col">Aujourd'hui</th></tr></thead>
                 <tbody id="exp-corps"></tbody>
               </table>
             </div>
@@ -107,16 +121,17 @@
           </div>
           <div class="commandes">
             <div class="curseur-ligne">
-              <label for="exp-curseur">Avant</label>
-              <input type="range" id="exp-curseur" min="1" max="2" step="0.01" value="1">
-              <label for="exp-curseur">Après</label>
+              <label for="exp-curseur">Big Bang</label>
+              <input type="range" id="exp-curseur" min="0" max="1000" step="1" value="1000">
+              <label for="exp-curseur">Aujourd'hui</label>
             </div>
             <div class="etapes actions">
-              <button type="button" class="lecture" id="exp-animer">Faire passer le temps</button>
+              <button type="button" class="lecture" id="exp-animer">Du Big Bang à aujourd'hui (12 s)</button>
               <button type="button" class="son" id="exp-vue" aria-pressed="false">Se placer sur la galaxie B</button>
             </div>
           </div>
         </div>
+        <p class="texte-doux colonne" style="margin:1rem 0 0;font-size:0.9rem">Modèle simplifié : les distances grandissent comme (temps ÷ âge de l'Univers) à la puissance 2/3. En réalité, l'expansion accélère depuis quelques milliards d'années.</p>
       </div>
     </section>
 
